@@ -55,14 +55,14 @@ function appendToDisplay() {
         let bookInfo = Object.values(book);
         for(i = 0; i <= bookInfo.length; i++) {
             if (i < 3) {
-                let tableData = document.createElement("td");
-                let textNode = document.createTextNode(bookInfo[i]);
+                const tableData = document.createElement("td");
+                const textNode = document.createTextNode(bookInfo[i]);
                 tableData.appendChild(textNode);
                 tableRow.appendChild(tableData);
             }
             else if (i === 3){
-                let input = document.createElement("input");
-                let tableData = document.createElement("td");
+                const input = document.createElement("input");
+                const tableData = document.createElement("td");
                 input.type = "checkbox";
                 if (bookInfo[3] === true) {
                     input.checked = true;
@@ -75,9 +75,18 @@ function appendToDisplay() {
                 }
             }
             else {
-                let removeButton = document.createElement("button");
-                let tableData = document.createElement("td");
+                const removeButton = document.createElement("button");
+                const readButton = document.createElement("button");
+                const tableData = document.createElement("td");
+                tableData.classList.add("options");
                 removeButton.textContent = "Remove";
+                removeButton.onclick = index => {
+                    myLibrary.splice (index, 1);
+                    appendToDisplay();
+                }
+                readButton.textContent = 'Read';
+
+                tableData.appendChild(readButton);
                 tableData.appendChild(removeButton);
                 tableRow.appendChild(tableData);
             }
@@ -85,6 +94,11 @@ function appendToDisplay() {
         tableBody.appendChild(tableRow);
     })
 }
+
+// function removeBook(index){
+//     myLibrary.splice (index, 1);
+//     appendToDisplay();
+// }
 
 const defaultBook = new Book("The Hobbit", "J.R.R Tolkien", 295, false)
 

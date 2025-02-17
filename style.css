@@ -52,10 +52,16 @@ th, td {
     padding: 8px;
 }
 
-td > button,
 td > input {
     display: block;
     margin: auto;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
 }
 
 input[type=checkbox] {
