@@ -64,21 +64,36 @@ input[type=checkbox] {
 
 button {
     background-color: peru;
-    padding: 0 8px;
+    padding: 2px 8px;
+    border: none;
+    color: white;
+    font-weight: bold;
+
+    &:hover {
+        background-color: orange;
+    }
 }
 
-.addBookForm {
+.modalOverlay{
     position: fixed;
+    display: none;
     background: rgba(0, 0, 0, 0.6);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.modalContent {
+    background-color: rgb(32, 47, 82);
     padding: 24px;
     width: 300px;
     border-radius: 8px;
     box-shadow: 0 0 10px #ff8c42;
 }
-
 
 .bookForm {
     display: flex;
@@ -100,6 +115,9 @@ button {
         border: none;
         border-radius: 4px;
         padding: 4px;
+        font-weight: bold;
+        font-size: 1em;
+        color: white;
     }
     
 }
@@ -108,6 +126,8 @@ button {
     float: right;
     font-size: 24px;
     cursor: pointer;
+    font-weight: bold;
+
     &:hover {
         color: orange;
     }

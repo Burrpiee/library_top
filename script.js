@@ -1,9 +1,37 @@
 const myLibrary = [];
-const form = document.querySelector(".addBookForm");
+const modal = document.querySelector(".modalOverlay");
+const form = document.querySelector(".bookForm");
+const closeButton = document.getElementById("closeButton");
+const newBookButton = document.getElementById("newBookButton");
+const tableBody = document.querySelector("tbody");
 
-function showForm() {
-    form.style.display = "block";
+newBookButton.onclick = () => {
+    modal.style.display = "flex";
 }
+
+closeButton.onclick = () => {
+    modal.style.display = "none";
+}
+
+window.onclick = event => {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const title = document.getElementById("title").value.trim();
+    const author = document.getElementById("author").value.trim();
+    const pages = document.getElementById("pages").value;
+    const read = document.getElementById("read").checked;
+
+    const book = new Book(title, author, pages, read);
+    addBookToLibrary(book);
+    form.reset();
+    modal.style.display = "none";
+    appendToDisplay();
+})
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -17,7 +45,7 @@ function addBookToLibrary(book) {
 }
 
 function appendToDisplay() {
-    let tableBody = document.querySelector("tbody");
+    tableBody.textContent = "";
     
     myLibrary.forEach (book => {
         let tableRow = document.createElement("tr");
@@ -34,12 +62,12 @@ function appendToDisplay() {
                 let input = document.createElement("input");
                 let tableData = document.createElement("td");
                 input.type = "checkbox";
-                if (bookInfo[3] === "No") {
+                if (bookInfo[3] === true) {
+                    input.checked = true;
                     tableData.appendChild(input);
                     tableRow.appendChild(tableData);
                 }
                 else {
-                    input.checked = true;
                     tableData.appendChild(input);
                     tableRow.appendChild(tableData);
                 }
@@ -56,10 +84,10 @@ function appendToDisplay() {
     })
 }
 
-const defaultBook = new Book("The Hobbit", "J.R.R Tolkien", "295", "No")
+const defaultBook = new Book("The Hobbit", "J.R.R Tolkien", 295, false)
 
-const book1 = new Book("To kill a MockingBird", "Harper Lee", "281", "Yes")
+const defaultBook2 = new Book("To kill a MockingBird", "Harper Lee", 281, true)
 
 addBookToLibrary(defaultBook);
-addBookToLibrary(book1);
+addBookToLibrary(defaultBook2);
 appendToDisplay();
