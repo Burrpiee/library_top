@@ -40,6 +40,8 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+Book.prototype
+
 function addBookToLibrary(book) {
     myLibrary.push(book);
 }
@@ -47,7 +49,7 @@ function addBookToLibrary(book) {
 function appendToDisplay() {
     tableBody.textContent = "";
     
-    myLibrary.forEach (book => {
+    myLibrary.forEach((book, index) => {
         let tableRow = document.createElement("tr");
 
         let bookInfo = Object.values(book);
