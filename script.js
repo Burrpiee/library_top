@@ -40,7 +40,10 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-Book.prototype
+Book.prototype.toggleStatus = function() {
+    this.read = !this.read;
+    appendToDisplay();
+}
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
@@ -61,44 +64,37 @@ function appendToDisplay() {
                 tableRow.appendChild(tableData);
             }
             else if (i === 3){
-                const input = document.createElement("input");
                 const tableData = document.createElement("td");
-                input.type = "checkbox";
-                if (bookInfo[3] === true) {
-                    input.checked = true;
-                    tableData.appendChild(input);
-                    tableRow.appendChild(tableData);
-                }
-                else {
-                    tableData.appendChild(input);
-                    tableRow.appendChild(tableData);
-                }
+                tableData.style.maxWidth = "50px";
+
+                tableData.textContent = book.read ? "Read" : "Not read";
+                tableRow.appendChild(tableData);
             }
             else {
                 const removeButton = document.createElement("button");
-                const readButton = document.createElement("button");
+                const statusButton = document.createElement("button");
+                const div = document.createElement("div");
                 const tableData = document.createElement("td");
-                tableData.classList.add("options");
+                div.classList.add("options");
                 removeButton.textContent = "Remove";
-                removeButton.onclick = index => {
-                    myLibrary.splice (index, 1);
+                removeButton.onclick = () => {
+                    myLibrary.splice(index, 1);
                     appendToDisplay();
                 }
-                readButton.textContent = 'Read';
+                statusButton.textContent = 'Status';
+                statusButton.onclick = () => {
+                    book.toggleStatus();
+                }
 
-                tableData.appendChild(readButton);
-                tableData.appendChild(removeButton);
+                div.appendChild(statusButton);
+                div.appendChild(removeButton);
+                tableData.appendChild(div);
                 tableRow.appendChild(tableData);
             }
         }
         tableBody.appendChild(tableRow);
     })
 }
-
-// function removeBook(index){
-//     myLibrary.splice (index, 1);
-//     appendToDisplay();
-// }
 
 const defaultBook = new Book("The Hobbit", "J.R.R Tolkien", 295, false)
 

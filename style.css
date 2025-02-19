@@ -43,6 +43,7 @@ main {
         font-size: 24px;
     }
 }  
+
 table, th, td {
     border: 1px solid;
     border-collapse: collapse;
@@ -50,11 +51,6 @@ table, th, td {
 
 th, td {
     padding: 8px;
-}
-
-td > input {
-    display: block;
-    margin: auto;
 }
 
 .options {
