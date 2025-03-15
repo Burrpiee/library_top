@@ -33,16 +33,18 @@ form.addEventListener("submit", (event) => {
     appendToDisplay();
 })
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+class Book {
+    constructor (title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 
-Book.prototype.toggleStatus = function() {
-    this.read = !this.read;
-    appendToDisplay();
+    toggleStatus() {
+        this.read = !this.read;
+        appendToDisplay();
+    }
 }
 
 function addBookToLibrary(book) {
